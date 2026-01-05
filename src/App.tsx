@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Download, MessageCircle, GraduationCap, Award, Briefcase, User, Mail, Phone, MapPin, Linkedin as LinkedIn, Calendar, ExternalLink, ChevronRight, Star, TrendingUp, Users, BookOpen, Code, BarChart3, Brain, ArrowUp } from 'lucide-react';
 import profileImage from './DSC_8833.jpg';
+import AboutSection from './components/AboutSection';
+import EducationSection from './components/EducationSection';
+import { Timeline } from './components/Timeline';
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -59,464 +62,256 @@ function App() {
 
   return (
     <div className="font-lato bg-white text-gray-900 overflow-x-hidden">
-      {/* Enhanced Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrollY > 50 
-          ? 'bg-white/95 backdrop-blur-lg shadow-lg border-b border-gray-100' 
-          : 'bg-transparent'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 lg:h-20">
-            <div className={`font-poppins font-bold text-xl lg:text-2xl transition-all duration-300 ${
-              scrollY > 50 
-                ? 'text-navy' 
-                : 'text-white'
-            }`}>
-              <span className={scrollY > 50 ? '' : 'gradient-text'}>Mrunmayi Shahane</span>
-              <div className={`h-0.5 w-0 bg-gradient-to-r from-gold to-yellow-400 transition-all duration-500 ${
-                scrollY > 50 ? 'w-1/2' : ''
-              }`}></div>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex space-x-1">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <button
-                    key={item.id}
-                    onClick={() => scrollToSection(item.id)}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-300 transform hover:scale-105 ${
-                      activeSection === item.id
-                        ? 'text-gold bg-gold/10 shadow-md'
-                        : scrollY > 50
-                        ? 'text-gray-600 hover:text-navy hover:bg-gray-50'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
-                    }`}
-                  >
-                    <Icon size={16} className={activeSection === item.id ? 'animate-pulse-slow' : ''} />
-                    <span className="font-medium">{item.label}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="lg:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className={`transition-colors duration-300 ${
-                  scrollY > 50 ? 'text-gray-600 hover:text-navy' : 'text-white hover:text-gold'
-                }`}
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced Mobile Navigation */}
-        <div className={`lg:hidden transition-all duration-300 ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-        } overflow-hidden bg-white/95 backdrop-blur-lg border-t border-gray-100`}>
-          <div className="px-4 py-4 space-y-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`flex items-center space-x-3 w-full px-4 py-3 rounded-xl transition-all duration-200 transform hover:scale-105 ${
-                    activeSection === item.id
-                      ? 'text-gold bg-gold/10 shadow-md'
-                      : 'text-gray-600 hover:text-navy hover:bg-gray-50'
-                  }`}
-                >
-                  <Icon size={18} className={activeSection === item.id ? 'animate-pulse-slow' : ''} />
-                  <span className="font-medium">{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </nav>
-
       {/* Enhanced Hero Section */}
-      <section id="hero" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-navy-dark via-navy to-navy-light text-white relative overflow-hidden">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg')] bg-cover bg-center opacity-10"></div>
-          <div className="absolute top-20 left-10 w-72 h-72 bg-gold/5 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-gold/3 rounded-full blur-3xl animate-pulse-slow delay-1000"></div>
-          {/* Additional decorative elements */}
-          <div className="absolute top-1/4 right-1/4 w-24 h-24 bg-gold/10 rounded-full blur-xl animate-float"></div>
-          <div className="absolute bottom-1/3 left-1/4 w-32 h-32 bg-gold/8 rounded-full blur-2xl animate-float delay-700"></div>
-          <div className="hidden lg:block absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-radial from-gold/5 to-transparent rounded-full blur-2xl"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 relative z-10">
-          <div className="text-center">
-            {/* Enhanced Profile Image */}
-            <div className="mb-8 transform hover:scale-105 transition-transform duration-500">
-              <div className="w-40 h-40 sm:w-48 sm:h-48 lg:w-56 lg:h-56 mx-auto rounded-full bg-gradient-to-br from-gold via-gold/90 to-gold/70 p-1.5 mb-6 shadow-2xl relative before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-r before:from-gold-light before:to-gold before:animate-spin before:opacity-70 before:blur-md before:-z-10">
-                <img 
-                  src={profileImage} 
-                  alt="Profile" 
-                  className="w-full h-full rounded-full object-cover object-center shadow-inner-lg"
-                />
+      <section id="hero" className="bg-gray-50">
+        {/* Header */}
+        <header className="py-4 md:py-6">
+          <div className="container px-4 mx-auto sm:px-6 lg:px-8">
+            <div className="flex items-center justify-between">
+              <div className="flex-shrink-0">
+                <div className="text-2xl font-bold text-gray-900">Mrunmayi Shahane</div>
+              </div>
+
+              <div className="flex lg:hidden">
+                <button type="button" onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-900">
+                  {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+                </button>
+              </div>
+
+              <div className="hidden lg:flex lg:ml-10 xl:ml-16 lg:items-center lg:justify-center lg:space-x-8 xl:space-x-16">
+                <button onClick={() => scrollToSection('about')} className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">About</button>
+                <button onClick={() => scrollToSection('experience')} className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">Experience</button>
+                <button onClick={() => scrollToSection('skills')} className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">Skills</button>
+                <button onClick={() => scrollToSection('contact')} className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">Contact</button>
+              </div>
+
+              <div className="hidden lg:ml-auto lg:flex lg:items-center lg:space-x-8 xl:space-x-10">
+                <a href="https://linkedin.com/in/mrunmayi-shahane" target="_blank" rel="noopener noreferrer" className="text-base font-medium text-gray-900 transition-all duration-200 rounded focus:outline-none font-pj hover:text-opacity-50 focus:ring-1 focus:ring-gray-900 focus:ring-offset-2">LinkedIn</a>
+                <a href="/Modern_Simple_ATS_Friendly_LateX_CV.pdf" download className="px-5 py-2 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-xl hover:bg-gray-600 font-pj focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900" role="button">
+                  Download Resume
+                </a>
               </div>
             </div>
-            
-            {/* Enhanced Typography */}
-            <div className="space-y-6 animate-fade-in">
-              <h1 className="font-poppins text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
-                <span className="gradient-text">Mrunmayi Shahane</span>
-              </h1>
-              
-              <p className="font-poppins text-lg sm:text-xl lg:text-2xl font-medium text-gray-100 max-w-3xl mx-auto">
-                Digital Marketer and HR Professional
-              </p>
-              
-              <p className="text-base sm:text-lg lg:text-xl max-w-4xl mx-auto text-gray-300 leading-relaxed px-4">
-                Motivated BBA graduate specializing in Human Resource Management with a passion for digital marketing
-              </p>
-            </div>
-            
-            {/* Enhanced CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12 px-4">
-              <a 
-                href="/Modern_Simple_ATS_Friendly_LateX_CV.pdf" 
-                download
-                className="btn-primary group px-8 py-4 text-lg font-semibold hover:scale-105 hover:shadow-gold w-full sm:w-auto"
-              >
-                <Download size={20} className="mr-2 group-hover:animate-bounce" />
-                <span>Download Resume</span>
-              </a>
-              <button 
-                onClick={() => scrollToSection('contact')}
-                className="btn-secondary group px-8 py-4 text-lg font-semibold hover:scale-105 w-full sm:w-auto"
-              >
-                <MessageCircle size={20} className="mr-2 group-hover:animate-pulse" />
-                <span>Let's Connect</span>
-              </button>
+          </div>
+        </header>
+
+        {/* Hero Content */}
+        <section className="pt-12 pb-12 sm:pb-16 lg:pt-8">
+          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            <div className="grid max-w-lg grid-cols-1 mx-auto lg:max-w-full lg:items-center lg:grid-cols-2 gap-y-12 lg:gap-x-16">
+              <div>
+                <div className="text-center lg:text-left">
+                  <h1 className="text-4xl font-bold leading-tight text-gray-900 sm:text-5xl sm:leading-tight lg:leading-tight lg:text-6xl font-pj">
+                    HR Professional Ready to Drive Organizational Success
+                  </h1>
+                  <p className="mt-2 text-lg text-gray-600 sm:mt-8 font-inter">
+                    Passionate about talent acquisition, employee engagement, and building positive workplace cultures. Open to new opportunities.
+                  </p>
+
+                  <form action="#" method="POST" className="mt-8 sm:mt-10" onSubmit={(e) => { e.preventDefault(); scrollToSection('contact'); }}>
+                    <div className="relative p-2 sm:border sm:border-gray-400 group sm:rounded-xl sm:focus-within:ring-1 sm:focus-within:ring-gray-900 sm:focus-within:border-gray-900">
+                      <input
+                        type="email"
+                        placeholder="Enter email address"
+                        className="block w-full px-4 py-4 text-gray-900 placeholder-gray-900 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
+                        required
+                      />
+                      <div className="mt-4 sm:mt-0 sm:absolute sm:inset-y-0 sm:right-0 sm:flex sm:items-center sm:pr-2">
+                        <button type="submit" className="inline-flex px-6 py-3 text-lg font-bold text-white transition-all duration-200 bg-gray-900 rounded-lg focus:outline-none focus:bg-gray-600 font-pj hover:bg-gray-600">
+                          Get in Touch
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div className="flex items-center justify-center mt-10 space-x-6 lg:justify-start sm:space-x-8">
+                  <div className="flex items-center">
+                    <p className="text-3xl font-medium text-gray-900 sm:text-4xl font-pj">3+</p>
+                    <p className="ml-3 text-sm text-gray-900 font-pj">Years<br />Experience</p>
+                  </div>
+
+                  <div className="hidden sm:block">
+                    <svg className="text-gray-400" width="16" height="39" viewBox="0 0 16 39" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+                      <line x1="0.72265" y1="10.584" x2="15.7226" y2="0.583975"></line>
+                      <line x1="0.72265" y1="17.584" x2="15.7226" y2="7.58398"></line>
+                      <line x1="0.72265" y1="24.584" x2="15.7226" y2="14.584"></line>
+                      <line x1="0.72265" y1="31.584" x2="15.7226" y2="21.584"></line>
+                      <line x1="0.72265" y1="38.584" x2="15.7226" y2="28.584"></line>
+                    </svg>
+                  </div>
+
+                  <div className="flex items-center">
+                    <p className="text-3xl font-medium text-gray-900 sm:text-4xl font-pj">50+</p>
+                    <p className="ml-3 text-sm text-gray-900 font-pj">Successful<br />Hires</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-100/30 via-purple-100/30 to-pink-100/30 rounded-3xl transform rotate-3"></div>
+                <div className="absolute -top-4 -left-4 w-24 h-24 bg-blue-200 rounded-full opacity-40 blur-xl"></div>
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-purple-200 rounded-full opacity-40 blur-xl"></div>
+                <div className="absolute top-1/4 -right-8 w-16 h-16 border-4 border-gold/30 rounded-full"></div>
+                <div className="absolute bottom-1/4 -left-8 w-20 h-20 border-4 border-blue-300/30 rounded-full"></div>
+                <div className="absolute top-10 -left-6">
+                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="20" cy="20" r="2" fill="#F59E0B" opacity="0.6"/>
+                    <circle cx="10" cy="10" r="1.5" fill="#3B82F6" opacity="0.5"/>
+                    <circle cx="30" cy="15" r="1.5" fill="#8B5CF6" opacity="0.5"/>
+                  </svg>
+                </div>
+                <div className="absolute bottom-10 -right-6">
+                  <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 25 L20 15 L30 25 L20 35 Z" fill="#F59E0B" opacity="0.3"/>
+                  </svg>
+                </div>
+                <img className="w-full relative z-10 rounded-2xl shadow-2xl" src={profileImage} alt="Mrunmayi Shahane - HR Professional" />
+              </div>
             </div>
           </div>
-        </div>
-        
-        {/* Enhanced Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-slow cursor-pointer" onClick={() => scrollToSection('about')}>
-          <div className="flex flex-col items-center space-y-2">
-            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center group hover:border-gold hover:border-opacity-80 transition-colors duration-300">
-              <div className="w-1 h-3 bg-white/60 group-hover:bg-gold rounded-full mt-2 animate-pulse-slow"></div>
-            </div>
-            <ChevronRight className="rotate-90 text-white/60 group-hover:text-gold transition-colors duration-300" size={20} />
-          </div>
-        </div>
+        </section>
       </section>
 
       {/* Enhanced About Section */}
-      <section id="about" className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-4 relative inline-block">
-              About Me
-              <span className="absolute -bottom-2 left-0 right-0 h-1.5 bg-gradient-to-r from-gold to-yellow-400 rounded-full transform scale-x-50 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-gold to-yellow-400 mx-auto mb-6 rounded-full shadow-sm"></div>
-            <p className="text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto">
-              Motivated and detail-oriented BBA graduate with a passion for digital marketing
-            </p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="space-y-6 lg:space-y-8">
-              <div className="prose prose-lg text-gray-700 space-y-6">
-                <p className="text-base lg:text-lg leading-relaxed">
-                  As a BBA graduate with a specialization in Human Resource Management, I possess a solid foundation in business operations, communication, and team coordination, complemented by growing expertise in digital tools and online marketing trends.
-                </p>
-                
-                <p className="text-base lg:text-lg leading-relaxed">
-                  I'm eager to apply creative thinking and analytical skills to build impactful digital marketing strategies. Currently upskilling in areas such as SEO, social media marketing, content creation, and performance analytics.
-                </p>
-                
-                <p className="text-base lg:text-lg leading-relaxed">
-                  Looking to kickstart a career in digital marketing with a focus on brand engagement, campaign management, and audience growth while leveraging my background in human resource management.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6">
-                <div className="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <TrendingUp className="text-gold mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" size={40} />
-                  <h3 className="font-poppins font-semibold text-lg text-navy mb-2">Digital Marketing</h3>
-                  <p className="text-gray-600">Campaign analysis & reporting</p>
-                </div>
-                <div className="group text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-                  <Users className="text-gold mx-auto mb-4 group-hover:scale-110 transition-transform duration-300" size={40} />
-                  <h3 className="font-poppins font-semibold text-lg text-navy mb-2">HR Management</h3>
-                  <p className="text-gray-600">Team coordination & leadership</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="bg-white p-6 lg:p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300">
-              <h3 className="font-poppins text-2xl font-bold text-navy mb-6">Areas of Expertise</h3>
-              <div className="space-y-4">
-                {[
-                  'Business Administration',
-                  'Human Resource Management',
-                  'Organizational Behavior',
-                  'Communication & Presentation Skills',
-                  'Team Leadership & Coordination',
-                  'Digital Marketing Fundamentals',
-                  'Email & Social Media Marketing',
-                  'Marketing Analytics',
-                  'E-commerce Management'
-                ].map((competency, index) => (
-                  <div key={index} className="flex items-center space-x-3 group">
-                    <div className="w-3 h-3 bg-gradient-to-r from-gold to-yellow-400 rounded-full group-hover:scale-125 transition-transform duration-200"></div>
-                    <span className="font-medium text-gray-800 group-hover:text-navy transition-colors duration-200">{competency}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutSection />
 
       {/* Enhanced Education Section */}
-      <section id="education" className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-4 relative inline-block">
-              Education
-              <span className="absolute -bottom-2 left-0 right-0 h-1.5 bg-gradient-to-r from-gold to-yellow-400 rounded-full transform scale-x-50 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-gold to-yellow-400 mx-auto mb-6 rounded-full shadow-sm"></div>
-            <p className="text-lg lg:text-xl text-gray-600">Academic background and qualifications</p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Academic Timeline */}
-            <div>
-              <div className="group bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-transparent hover:border-gold overflow-hidden">
-                <div className="p-6 lg:p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="bg-gradient-to-r from-gold to-yellow-400 p-3 rounded-full mr-4 group-hover:scale-110 transition-transform duration-300">
-                      <GraduationCap className="text-white" size={24} />
-                    </div>
-                    <h3 className="font-poppins text-2xl font-bold text-navy">Academic Journey</h3>
-                  </div>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="font-poppins font-semibold text-xl text-navy mb-2">Bachelor of Business Administration (BBA)</h4>
-                      <p className="text-gold font-medium mb-2">Human Resource Management Specialization</p>
-                      <p className="text-gray-600 mb-2">Savitribai Phule Pune University | 2022-2025</p>
-                      <p className="text-gray-600 mb-2">College: Shree Siddhivinayak Arts & Commerce Mahila Mahavidyalaya, Pune</p>
-                      <p className="text-navy font-semibold text-lg">CGPA: 7.03 | Grade: A</p>
-                    </div>
-                    
-                    <div className="mt-4 pt-4 border-t border-gray-100">
-                      <h5 className="font-medium text-navy mb-3">Relevant Coursework:</h5>
-                      <div className="grid grid-cols-2 gap-2">
-                        {[
-                          'Human Resource Management', 
-                          'Global HRM', 
-                          'Legal Aspects in HR', 
-                          'Research Methodology', 
-                          'MIS', 
-                          'E-Commerce',
-                          'CSR',
-                          'Data Mining',
-                          'Business Project Management',
-                          'Personality Development'
-                        ].map((course, index) => (
-                          <div key={index} className="flex items-center">
-                            <div className="w-2 h-2 bg-gold rounded-full mr-2"></div>
-                            <span className="text-gray-700 text-sm">{course}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Enhanced Relevant Courses */}
-            <div>
-              <div className="bg-gradient-to-r from-gray-50 to-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border-l-4 border-transparent hover:border-gold overflow-hidden">
-                <div className="p-6 lg:p-8">
-                  <div className="flex items-center mb-6">
-                    <div className="bg-gradient-to-r from-gold to-yellow-400 p-3 rounded-full mr-4">
-                      <BookOpen className="text-white" size={24} />
-                    </div>
-                    <h3 className="font-poppins text-2xl font-bold text-navy">Online Courses & Certifications</h3>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {[
-                      { name: 'Foundations of Digital Marketing and E-commerce', issuer: 'Coursera', hours: '12 hours' },
-                      { name: 'Attract and Engage Customers with Digital Marketing', issuer: 'Coursera', hours: '14 hours' },
-                      { name: 'From Likes to Leads: Interact with Customers Online', issuer: 'Coursera', hours: '21 hours' },
-                      { name: 'Think Outside the Inbox: Email Marketing', issuer: 'Coursera', hours: '18 hours' },
-                      { name: 'Assess for Success: Marketing Analytics and Measurement', issuer: 'Coursera', hours: '18 hours' },
-                      { name: 'Make the Sale: Build, Launch, and Manage E-commerce Stores', issuer: 'Coursera', hours: '15 hours' },
-                      { name: 'Satisfaction Guaranteed: Develop Customer Loyalty Online', issuer: 'Coursera', hours: '15 hours' },
-                      { name: 'Accelerate Your Job Search with AI', issuer: 'Coursera', hours: '' },
-                      { name: 'Person-Centred Counselling Course', issuer: 'Udemy', hours: '' },
-                      { name: 'Diploma Training Course in Modern Applied Psychology (DiMAP)', issuer: 'Udemy', hours: '' }
-                    ].map((cert, index) => (
-                      <div key={index} className="group bg-white border border-gray-100 hover:border-gold/50 p-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-md">
-                        <h4 className="font-medium text-navy mb-1 group-hover:text-gold transition-colors duration-200 text-sm">{cert.name}</h4>
-                        <p className="text-xs text-gray-600">{cert.issuer} {cert.hours && `• ${cert.hours}`}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <EducationSection />
 
-      {/* Professional Experience Section */}
-      <section id="experience" className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-poppins text-3xl sm:text-4xl lg:text-5xl font-bold text-navy mb-4 relative inline-block">
-              Professional Experience
-              <span className="absolute -bottom-2 left-0 right-0 h-1.5 bg-gradient-to-r from-gold to-yellow-400 rounded-full transform scale-x-50 transition-transform duration-300 group-hover:scale-x-100"></span>
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-gold to-yellow-400 mx-auto mb-6 rounded-full shadow-sm"></div>
-            <p className="text-lg lg:text-xl text-gray-600">Work experience and internships</p>
-          </div>
-          
-          <div className="space-y-8">
-            {/* HR Intern */}
-            <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-gold transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-gold">
-              <div className="p-6 lg:p-8 relative">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-gold/10 to-transparent rounded-bl-3xl -z-10"></div>
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                  <div>
-                    <h3 className="font-poppins text-xl lg:text-2xl font-bold text-navy mb-2 group-hover:text-gold-dark transition-colors duration-300">HR Intern</h3>
-                    <p className="text-gold font-medium">Silver Birch Multispeciality Hospital Pvt. Ltd.</p>
+      {/* Professional Experience Section - Timeline */}
+      <section id="experience">
+        <Timeline data={[
+          {
+            title: "2024",
+            content: (
+              <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-pink-400">
+                <div className="p-6 lg:p-8 relative">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-pink-100/30 to-transparent rounded-bl-3xl -z-10"></div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <div>
+                      <h3 className="font-poppins text-xl lg:text-2xl font-bold text-navy mb-2 group-hover:text-pink-600 transition-colors duration-300">HR Intern</h3>
+                      <p className="text-blue-600 font-medium">Silver Birch Multispeciality Hospital Pvt. Ltd.</p>
+                    </div>
+                    <div className="mt-2 md:mt-0">
+                      <span className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm font-medium shadow-sm group-hover:bg-pink-100 transition-colors duration-300">
+                        September 2024 - November 2024
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-2 md:mt-0">
-                    <span className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm font-medium shadow-sm group-hover:bg-gold/20 transition-colors duration-300">
-                      September 2024 - November 2024
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-navy mb-3 flex items-center">
-                      <div className="w-1 h-6 bg-gold rounded-full mr-3"></div>
-                      Responsibilities & Achievements
-                    </h4>
-                    <ul className="space-y-3 pl-2">
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Assisted in day-to-day HR operations including recruitment, employee management, and performance reviews.</p>
-                      </li>
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Supported administrative HR functions while gaining exposure to healthcare HR practices.</p>
-                      </li>
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Worked under the guidance of the hospital's gynecologist to understand clinical support functions.</p>
-                      </li>
-                    </ul>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-navy mb-3 flex items-center">
+                        <div className="w-1 h-6 bg-gradient-to-b from-pink-400 to-blue-400 rounded-full mr-3"></div>
+                        Responsibilities & Achievements
+                      </h4>
+                      <ul className="space-y-3 pl-2">
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Assisted in day-to-day HR operations including recruitment, employee management, and performance reviews.</p>
+                        </li>
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Supported administrative HR functions while gaining exposure to healthcare HR practices.</p>
+                        </li>
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-pink-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Worked under the guidance of the hospital's gynecologist to understand clinical support functions.</p>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Administration Intern */}
-            <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-gold transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-gold">
-              <div className="p-6 lg:p-8 relative">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-gold/10 to-transparent rounded-bl-3xl -z-10"></div>
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                  <div>
-                    <h3 className="font-poppins text-xl lg:text-2xl font-bold text-navy mb-2 group-hover:text-gold-dark transition-colors duration-300">Administration Intern</h3>
-                    <p className="text-gold font-medium">Rely On Pharmaceuticals Pvt. Ltd.</p>
+            ),
+          },
+          {
+            title: "2023-24",
+            content: (
+              <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-blue-400">
+                <div className="p-6 lg:p-8 relative">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-blue-100/30 to-transparent rounded-bl-3xl -z-10"></div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <div>
+                      <h3 className="font-poppins text-xl lg:text-2xl font-bold text-navy mb-2 group-hover:text-blue-600 transition-colors duration-300">Administration Intern</h3>
+                      <p className="text-pink-600 font-medium">Rely On Pharmaceuticals Pvt. Ltd.</p>
+                    </div>
+                    <div className="mt-2 md:mt-0">
+                      <span className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm font-medium shadow-sm group-hover:bg-blue-100 transition-colors duration-300">
+                        December 2023 - March 2024
+                      </span>
+                    </div>
                   </div>
-                  <div className="mt-2 md:mt-0">
-                    <span className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm font-medium shadow-sm group-hover:bg-gold/20 transition-colors duration-300">
-                      December 2023 - March 2024
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-navy mb-3 flex items-center">
-                      <div className="w-1 h-6 bg-gold rounded-full mr-3"></div>
-                      Responsibilities & Achievements
-                    </h4>
-                    <ul className="space-y-3 pl-2">
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Interned in the Administration Department, contributing to daily operational management.</p>
-                      </li>
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Assisted with coordination between departments, file management, and routine reporting tasks.</p>
-                      </li>
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Strengthened organizational and communication skills in a corporate environment.</p>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Rights Cell Intern */}
-            <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-gold transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-gold">
-              <div className="p-6 lg:p-8 relative">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-gold/10 to-transparent rounded-bl-3xl -z-10"></div>
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                  <div>
-                    <h3 className="font-poppins text-xl lg:text-2xl font-bold text-navy mb-2 group-hover:text-gold-dark transition-colors duration-300">Rights Cell Intern (Volunteer)</h3>
-                    <p className="text-gold font-medium">Global Human Welfare Organization</p>
-                  </div>
-                  <div className="mt-2 md:mt-0">
-                    <span className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm font-medium shadow-sm group-hover:bg-gold/20 transition-colors duration-300">
-                      March 2019 - December 2019
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-navy mb-3 flex items-center">
-                      <div className="w-1 h-6 bg-gold rounded-full mr-3"></div>
-                      Responsibilities & Achievements
-                    </h4>
-                    <ul className="space-y-3 pl-2">
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Worked on social justice and human rights advocacy projects under the Shivane Vibhag division.</p>
-                      </li>
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Collaborated on research related to corruption, bonded labor, child rights, and human rights protection.</p>
-                      </li>
-                      <li className="flex items-start group/item">
-                        <div className="w-2 h-2 bg-gold rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
-                        <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Participated in outreach and awareness initiatives across government-linked programs.</p>
-                      </li>
-                    </ul>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-navy mb-3 flex items-center">
+                        <div className="w-1 h-6 bg-gradient-to-b from-blue-400 to-pink-400 rounded-full mr-3"></div>
+                        Responsibilities & Achievements
+                      </h4>
+                      <ul className="space-y-3 pl-2">
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Interned in the Administration Department, contributing to daily operational management.</p>
+                        </li>
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Assisted with coordination between departments, file management, and routine reporting tasks.</p>
+                        </li>
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Strengthened organizational and communication skills in a corporate environment.</p>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
+            ),
+          },
+          {
+            title: "2019",
+            content: (
+              <div className="group bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-purple-400">
+                <div className="p-6 lg:p-8 relative">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-100/30 to-transparent rounded-bl-3xl -z-10"></div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                    <div>
+                      <h3 className="font-poppins text-xl lg:text-2xl font-bold text-navy mb-2 group-hover:text-purple-600 transition-colors duration-300">Rights Cell Intern (Volunteer)</h3>
+                      <p className="text-blue-600 font-medium">Global Human Welfare Organization</p>
+                    </div>
+                    <div className="mt-2 md:mt-0">
+                      <span className="bg-navy/10 text-navy px-4 py-2 rounded-full text-sm font-medium shadow-sm group-hover:bg-purple-100 transition-colors duration-300">
+                        March 2019 - December 2019
+                      </span>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-navy mb-3 flex items-center">
+                        <div className="w-1 h-6 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full mr-3"></div>
+                        Responsibilities & Achievements
+                      </h4>
+                      <ul className="space-y-3 pl-2">
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Worked on social justice and human rights advocacy projects under the Shivane Vibhag division.</p>
+                        </li>
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Collaborated on research related to corruption, bonded labor, child rights, and human rights protection.</p>
+                        </li>
+                        <li className="flex items-start group/item">
+                          <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-3 group-hover/item:scale-125 transition-transform duration-300"></div>
+                          <p className="text-gray-700 group-hover/item:text-navy transition-colors duration-300">Participated in outreach and awareness initiatives across government-linked programs.</p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ),
+          },
+        ]} />
       </section>
 
       {/* Enhanced Skills Section */}
